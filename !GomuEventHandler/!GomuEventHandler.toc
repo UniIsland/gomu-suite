@@ -1,0 +1,8 @@
+## Interface: 40100
+## Title : !GomuEventHandler
+## Notes: auto release in battleground. \nlouder alert when u find a group.
+## Author: Bryht
+## Version: 0.0.1
+## SavedVariables:
+
+GomuEventHandler.lua

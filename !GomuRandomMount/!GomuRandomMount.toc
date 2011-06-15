@@ -1,0 +1,8 @@
+## Interface: 40000
+## Title : !GomuRandomMount
+## Notes: Call random mount / dismount / leave vehicle.
+## Author: Bryht
+## Version: 0.0.1
+## SavedVariablesPerCharacter: GRMProfile
+
+GomuRandomMount.lua

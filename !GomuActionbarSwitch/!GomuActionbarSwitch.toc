@@ -1,0 +1,8 @@
+## Interface: 40100
+## Title : !GomuActionbarSwitch
+## Notes: Switch among sets of action bar.
+## Author: Bryht
+## Version: 0.0.1
+## SavedVariablesPerCharacter: GASProfile
+
+GomuActionbarSwitch.lua

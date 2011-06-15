@@ -1,0 +1,95 @@
+<Ui xmlns="http://www.blizzard.com/wow/ui/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.blizzard.com/wow/ui/
+..\..\FrameXML\UI.xsd">
+	<Script File="GomuNotepad.lua"/>
+	<Button Name="GNPTabButton" inherits="UIPanelButtonTemplate" virtual="true">
+		<Size x="20" y="20"/>
+		<Scripts><OnClick>GNPCurrentTab_Update(self:GetText());</OnClick></Scripts>
+	</Button>
+	<Frame name="GNPFrame" parent="UIParent" toplevel="true" frameStrata="DIALOG" movable="true" alpha="0.7" clampedToScreen="true" hidden="true">
+		<Size><AbsDimension x="400" y="640"/></Size>
+		<Anchors><Anchor point="CENTER"/></Anchors>
+		<Backdrop bgFile="Interface\Tooltips\UI-Tooltip-Background" edgeFile="Interface\Tooltips\UI-Tooltip-Border" tile="true">
+			<EdgeSize><AbsValue val="12"/></EdgeSize>
+			<TileSize><AbsValue val="8"/></TileSize>
+			<BackgroundInsets><AbsInset left="1" right="1" top="1" bottom="1"/></BackgroundInsets>
+		</Backdrop>
+		<Frames>
+			<Button name="$parentCloseButton" inherits="UIPanelCloseButton">
+				<Anchors><Anchor point="BOTTOMRIGHT" relativePoint="TOPRIGHT" x="3" y="-7" /></Anchors>
+			</Button>
+			<Button name="$parentAcceptButton" inherits="UIPanelButtonTemplate2" text="SAVE">
+				<Size x="90" y="22"/>
+				<Anchors><Anchor point="BOTTOMLEFT" relativePoint="TOPLEFT" x="0" y="-2" /></Anchors>
+				<Scripts><OnClick function="GNPEditFrame_OnAccept"/></Scripts>
+			</Button>
+			<ScrollFrame name="$parentEditScrollFrame" inherits="MinimalScrollFrameTemplate">
+				<Anchors>
+					<Anchor point="TOPLEFT"><Offset x="4" y="-4"/></Anchor>
+					<Anchor point="BOTTOMRIGHT"><Offset x="-26" y="4"/></Anchor>
+				</Anchors>
+				<ScrollChild>
+					<EditBox name="GNPEditBox" multiLine="true" autoFocus="false">
+						<Size x="380" y="1"/>
+						<Anchors><Anchor point="TOPLEFT"/></Anchors>
+						<Scripts>
+							<OnShow function="GNPEditFrame_OnShow"/>
+							<OnTextChanged>
+								ScrollingEdit_OnTextChanged(self, self:GetParent());
+							</OnTextChanged> 
+							<OnCursorChanged function="ScrollingEdit_OnCursorChanged"/>
+							<OnUpdate>
+								ScrollingEdit_OnUpdate(self, elapsed, self:GetParent());
+							</OnUpdate>
+							<OnEscapePressed function="EditBox_ClearFocus"/>
+							<OnEditFocusLost>
+								self:HighlightText(0, 0);
+							</OnEditFocusLost>
+						</Scripts>
+						<FontString inherits="ChatFontNormal"/>
+					</EditBox>
+				</ScrollChild>
+			</ScrollFrame>
+			<Button name="$parentCurrentTab" inherits="UIPanelButtonTemplate" text="0">
+				<Size x="20" y="20"/>
+				<Anchors><Anchor point="LEFT" relativeTo="$parentAcceptButton" relativePoint="RIGHT" x="4" y="0" /></Anchors>
+			</Button>
+			<Button name="$parentTab0" inherits="GNPTabButton" text="0">
+				<Anchors><Anchor point="TOPRIGHT" relativePoint="TOPLEFT"/></Anchors>
+			</Button>
+			<Button name="$parentTab1" inherits="GNPTabButton" text="1">
+				<Anchors><Anchor point="TOP" relativeTo="$parentTab0" relativePoint="BOTTOM"/></Anchors>
+			</Button>
+			<Button name="$parentTab2" inherits="GNPTabButton" text="2">
+				<Anchors><Anchor point="TOP" relativeTo="$parentTab1" relativePoint="BOTTOM"/></Anchors>
+			</Button>
+			<Button name="$parentTab3" inherits="GNPTabButton" text="3">
+				<Anchors><Anchor point="TOP" relativeTo="$parentTab2" relativePoint="BOTTOM"/></Anchors>
+			</Button>
+			<Button name="$parentTab4" inherits="GNPTabButton" text="4">
+				<Anchors><Anchor point="TOP" relativeTo="$parentTab3" relativePoint="BOTTOM"/></Anchors>
+			</Button>
+			<Button name="$parentTab5" inherits="GNPTabButton" text="5">
+				<Anchors><Anchor point="TOP" relativeTo="$parentTab4" relativePoint="BOTTOM"/></Anchors>
+			</Button>
+			<Button name="$parentTab6" inherits="GNPTabButton" text="6">
+				<Anchors><Anchor point="TOP" relativeTo="$parentTab5" relativePoint="BOTTOM"/></Anchors>
+			</Button>
+			<Button name="$parentTab7" inherits="GNPTabButton" text="7">
+				<Anchors><Anchor point="TOP" relativeTo="$parentTab6" relativePoint="BOTTOM"/></Anchors>
+			</Button>
+			<Button name="$parentTab8" inherits="GNPTabButton" text="=">
+				<Anchors><Anchor point="TOP" relativeTo="$parentTab7" relativePoint="BOTTOM"/></Anchors>
+			</Button>
+		</Frames>
+		<Scripts>
+			<OnLoad>
+				GNPLoad();
+				self:RegisterForDrag("LeftButton");
+				self:SetBackdropBorderColor(TOOLTIP_DEFAULT_COLOR.r, TOOLTIP_DEFAULT_COLOR.g, TOOLTIP_DEFAULT_COLOR.b);
+				self:SetBackdropColor(0.0, 0.0, 0.0, 0.9);
+			</OnLoad>
+			<OnDragStart>self:StartMoving();</OnDragStart>
+			<OnDragStop>self:StopMovingOrSizing();</OnDragStop>
+		</Scripts>
+	</Frame>
+</Ui>
