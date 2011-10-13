@@ -1,8 +1,9 @@
-## Interface: 40100
+## Interface: 40200
 ## Title : !GomuBindingSwitch
 ## Notes: Switch among sets of key-bindings
 ## Author: Bryht
-## Version: 0.0.1
+## Version: 0.0.2
 ## SavedVariables: GBSProfile
 
 GomuBindingSwitch.lua
+
